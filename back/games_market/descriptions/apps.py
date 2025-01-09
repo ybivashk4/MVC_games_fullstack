@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DecriptionsConfig(AppConfig):
+class DescriptionsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'decriptions'
+    name = 'descriptions'

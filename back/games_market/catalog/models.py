@@ -1,4 +1,5 @@
 from django.db import models
+from descriptions.models import Description
 
 
 class Catalog(models.Model):
@@ -7,5 +8,5 @@ class Catalog(models.Model):
     game_img = models.TextField(default='misc/images/default.png')
 
     class Meta:
-        db_table = 'games'
+        db_table = 'shrot_desc_games'
 # Create your models here.
