@@ -1,8 +1,8 @@
 from rest_framework import routers
-from descriptions.views import DescriptionViewSet
+from .views import WishListViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 
-router.register('description', viewset=DescriptionViewSet)
+router.register('wishlist', viewset=WishListViewSet)
 
 urlpatterns = router.urls

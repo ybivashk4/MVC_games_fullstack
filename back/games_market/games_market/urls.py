@@ -21,7 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # подключаем маршруты из наших приложений
     path('', include('catalog.urls')),
-    path('', include('descriptions.urls')),
     path('', include('users.urls')),
     # подключаем маршруты авторизации
     re_path(r'^api/', include('djoser.urls')),

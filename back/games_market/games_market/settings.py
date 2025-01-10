@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'wishlist.apps.WishlistConfig',
     'bin.apps.BinConfig',
     'users.apps.UsersConfig',
-    'descriptions.apps.DescriptionsConfig',
 ]
 
 MIDDLEWARE = [
