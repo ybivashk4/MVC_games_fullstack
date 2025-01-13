@@ -7,7 +7,6 @@ from catalog.models import Catalog
 class CatalogSerializer(serializers.ModelSerializer):
     # Класс поля, который не принимает значение на основе пользовательского ввода,
     # а вместо этого берет свое значение из значения по умолчанию или вызываемого объекта.
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     # some_foreign_key = DescriptionSerializer(read_only=True)
     # some_foreign_key_id = serializers.PrimaryKeyRelatedField(queryset=Description.objects.all(),
     #                                                          source="some_foreign_key", write_only=True)

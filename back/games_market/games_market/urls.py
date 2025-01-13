@@ -22,6 +22,8 @@ urlpatterns = [
     # подключаем маршруты из наших приложений
     path('', include('catalog.urls')),
     path('', include('users.urls')),
+    path('', include('wishlist.urls')),
+    path('', include('bin.urls')),
     # подключаем маршруты авторизации
     re_path(r'^api/', include('djoser.urls')),
     re_path(r'^api/', include('djoser.urls.jwt')),

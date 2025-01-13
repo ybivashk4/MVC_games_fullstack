@@ -3,6 +3,6 @@ from .views import BinViewSet
 
 router = routers.DefaultRouter(trailing_slash=False)
 
-router.register('wishlist', viewset=BinViewSet)
+router.register('bin', viewset=BinViewSet)
 
 urlpatterns = router.urls

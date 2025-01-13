@@ -1,14 +1,14 @@
 from django.db import models
 from catalog.models import Catalog
-from catalog.serializers import CatalogSerializer
+from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
 
 class WishList(models.Model):
-    rating_w = models.ForeignKey(Catalog, on_delete=models.CASCADE)
-    game_name_w = models.ForeignKey(Catalog, on_delete=models.CASCADE)
-    game_img_w = models.ForeignKey(Catalog, on_delete=models.CASCADE)
+    game_information = models.ForeignKey(Catalog, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'wishlist'
