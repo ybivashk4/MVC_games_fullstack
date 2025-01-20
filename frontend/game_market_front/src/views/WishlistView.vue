@@ -39,7 +39,7 @@ onMounted(async () => {
 <template>
   <Header></Header>
   <div class="catalog">
-    <h3>Каталог</h3>
+    <h3>Список желаемого</h3>
     <div class="all_games">
       <div v-for="(game, index) in games" :key="index">
         <Card :game-name="game.game_name" :rating="game.rating" :image-path="game.game_img"></Card>

@@ -2,7 +2,10 @@ import {createRouter, createWebHistory} from 'vue-router'
 import LoginView from "@/views/LoginView.vue";
 import RegisterView from "@/views/RegisterView.vue";
 import MainView from "@/views/MainView.vue";
+import DescriptionView from "@/views/DescriptioView.vue";
 import {useAuthStore} from "@/stores/AuthStore.js";
+import BinView from "@/views/BinView.vue";
+import WishlistView from "@/views/WishlistView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,7 +30,25 @@ const router = createRouter({
       component: MainView,
       // only authenticated users can create
       meta: {requiresAuth: true},
-    }
+    },
+    {
+      path: '/description',
+      name: 'description',
+      component: DescriptionView,
+      meta: {requiresAuth: true},
+    },
+    {
+      path: '/bin',
+      name: 'bin',
+      component: BinView,
+      meta: {requiresAuth: true},
+    },
+    {
+      path: '/wishlist',
+      name: 'wishlist',
+      component: WishlistView,
+      meta: {requiresAuth: true},
+    },
   ]
 })
 

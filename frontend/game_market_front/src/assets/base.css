@@ -80,3 +80,17 @@ input {
 .auth_text {
   text-align: left;
 }
+h3 {
+  margin: 0;
+  padding: 0;
+  margin-left: 12vh;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.change_text_color {
+  color: #999999;
+}
