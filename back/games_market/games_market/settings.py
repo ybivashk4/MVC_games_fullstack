@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'wishlist.apps.WishlistConfig',
     'bin.apps.BinConfig',
     'users.apps.UsersConfig',
+    "corsheaders",
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'games_market.urls'
@@ -140,3 +143,6 @@ REST_FRAMEWORK = {
 SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ("Bearer",),
 }
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:5173',
+]

@@ -4,6 +4,7 @@ import {useAuthStore} from "@/stores/AuthStore.js";
 import VLoader from "@/components/VLoader.vue";
 import Header_non_auth from "@/components/Header_non_auth.vue";
 import Footer from "@/components/Footer.vue";
+import Card from "@/components/Card.vue";
 const authStore = useAuthStore();
 const router = useRouter()
 
