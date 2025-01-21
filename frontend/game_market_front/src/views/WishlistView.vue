@@ -4,7 +4,7 @@
 import Card from "@/components/Card.vue";
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue";
-import {getCatalog} from "@/api/catalog.js";
+import {getAllFromWishlist} from "@/api/wishlist.js";
 import {ref, onMounted} from "vue";
 import {useAuthStore} from "@/stores/AuthStore.js";
 import {LogOut} from "lucide-vue-next";
@@ -17,7 +17,7 @@ const router = useRouter()
 const authStore = useAuthStore();
 const getAllGames = async () => {
   try {
-    games.value = await getCatalog();
+    games.value = await getAllFromWishlist();
   }
   catch (e) {
     console.log(e);

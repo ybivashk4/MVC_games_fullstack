@@ -20,7 +20,7 @@ const getAllGames = async () => {
     games.value = await getCatalog();
   }
   catch (e) {
-    console.log(e);
+    console.warn(e);
   }
 }
 const logout = () => {
@@ -42,7 +42,7 @@ onMounted(async () => {
     <h3>Каталог</h3>
     <div class="all_games">
       <div v-for="(game, index) in games" :key="index">
-        <Card :game-name="game.game_name" :rating="game.rating" :image-path="game.game_img"></Card>
+        <Card :game-name="game.game_name" :rating="game.rating" :image-path="game.game_img" :game-id="game.id"></Card>
       </div>
     </div>
 

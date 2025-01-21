@@ -2,9 +2,37 @@
 <script setup>
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue";
-
+import BinCard from "@/components/BinCard.vue";
 const some_bool = true;
 
+import {getAllFromBin, DeleteGameFromBin} from "@/api/WishList.js";
+import {ref, onMounted} from "vue";
+import {useAuthStore} from "@/stores/AuthStore.js";
+import {useRouter} from "vue-router";
+
+
+let games = ref([]);
+
+const router = useRouter()
+const authStore = useAuthStore();
+const getAllGames = async () => {
+  try {
+    games.value = await getAllFromBin();
+  }
+  catch (e) {
+    console.warn(e);
+  }
+}
+const logout = () => {
+    authStore.logout()
+    router.push('/login')
+}
+onMounted(async () => {
+    await getAllGames();
+    if (authStore.authError) {
+        logout()
+    }
+})
 </script>
 
 
@@ -13,41 +41,8 @@ const some_bool = true;
   <h3>Корзина</h3>
   <div class="main_bin" v-if="some_bool">
     <div class="in_bin">
-      <div class="bin_card">
-        <img src="/src/assets/default.png" alt="" height="122px" width="220px">
-        <div>Some name</div>
-        <div class="flex-column price">
-          <div>
-            1649 Р
-          </div>
-          <div style="margin-left: 100%" class="change_text_color">
-            Удалить
-          </div>
-        </div>
-      </div>
-      <div class="bin_card">
-        <img src="/src/assets/default.png" alt="" height="122px" width="220px">
-        <div>Some name</div>
-        <div class="flex-column price">
-          <div>
-            1649 Р
-          </div>
-          <div style="margin-left: 100%" class="change_text_color">
-            Удалить
-          </div>
-        </div>
-      </div>
-      <div class="bin_card">
-        <img src="/src/assets/default.png" alt="" height="122px" width="220px">
-        <div>Some name</div>
-        <div class="flex-column price">
-          <div>
-            1649 Р
-          </div>
-          <div style="margin-left: 100%" class="change_text_color">
-            Удалить
-          </div>
-        </div>
+      <div v-for="(game, index) in games" :key="index">
+        <BinCard :game_name="game.game_name" :price="game.rating" :image-path="game.game_img"></BinCard>
       </div>
     </div>
 
@@ -95,24 +90,7 @@ export default {
   flex-direction: column;
   margin-right: 5%;
 }
-.bin_card {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 30px;
-  background-color: #0F0F0F;
-  border-radius: 10px;
-  padding: 2% 0 2% 0;
-}
 
-.price {
-  justify-content: space-between;
-  text-align: left;
-}
 .main_pay {
   display: flex;
   width: 20%;

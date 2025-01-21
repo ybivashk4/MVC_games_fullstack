@@ -8,6 +8,7 @@
         width="350px"
         height="400px"
         style="border-radius: 20px"
+        @click="redirectTo('description/' + gameId)"
       />
   </div>
   <div class="game_name">{{gameName}}</div>
@@ -30,6 +31,10 @@ export default {
       type: String,
       required: true,
     },
+    gameId: {
+      type: String,
+      required: true
+    },
   },
   data() {
     return {
@@ -51,6 +56,9 @@ export default {
       img.onerror = () => {
         console.warn(`Изображение по пути "${imagePath}" не найдено.`);
       };
+    },
+    redirectTo(path) {
+      this.$router.push(path);
     },
   },
 };

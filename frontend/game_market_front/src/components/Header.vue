@@ -8,18 +8,39 @@
     <div class="header_icons">
       <div style="display: flex">
       <span>0</span>
-      <img src="../assets/bin.svg" alt="">
+      <img
+        src="../assets/bin.svg" alt=""
+        @click="redirectTo('/bin')"
+      >
       </div>
 
-      <img src="../assets/menu.svg" alt="">
-      <img src="../assets/logout.svg" alt="">
+      <img
+        src="../assets/menu.svg" alt=""
+        @click="redirectTo('/')"
+      >
+      <img
+        src="../assets/logout.svg"
+        alt=""
+        @click="logout()"
+      >
     </div>
   </header>
 </template>
 
 <script>
 export default {
-  name: "Header"
+  name: "Header",
+  methods: {
+    redirectTo(path) {
+      this.$router.push(path);
+    },
+    logout() {
+      localStorage.removeItem('refresh');
+      localStorage.removeItem('access');
+      alert('Вы вышли из аккаунта');
+      this.$router.push('/login');
+    },
+  },
 }
 </script>
 
