@@ -6,14 +6,16 @@
       <div>
         {{price}} Р
       </div>
-      <div style="margin-left: 100%" class="change_text_color">
+      <button style="margin-left: 100%;width: 200%;height: 40%" class="change_text_color" @click="this.delete()">
         Удалить
-      </div>
+      </button>
     </div>
   </div>
 </template>
 
 <script>
+import {DeleteGameFromBin} from "@/api/WishList.js";
+
 export default {
   name: "BinCard",
   props: {
@@ -30,7 +32,18 @@ export default {
       type: String,
       required: true
     },
+    game_id: {
+      type: String,
+      required: true
+    }
   },
+  methods: {
+    async delete() {
+      await DeleteGameFromBin(this.game_id);
+      location.reload();
+
+    }
+  }
 }
 </script>
 

@@ -1,16 +1,14 @@
 import {$authHost} from "@/api/index.js";
 
 // data is game from catalog
-export const AddToWishList = async (id) => {
-  const game_from_catalog = await $authHost.get('catalog/'+id)
-    const game = await $authHost.post('wishlist', game_from_catalog.data)
-    return game
+export const AddToWishList = async (game_information_id) => {
+    const game = await $authHost.post('wishlist', {game_information_id})
+    return game.data
 }
 
-export const AddToBin = async (id) => {
-  const game_from_catalog = await $authHost.get('catalog/'+id)
-    const game = await $authHost.post('bin', game_from_catalog.data)
-    return game
+export const AddToBin = async (game_information_id) => {
+    const game = await $authHost.post('bin', {game_information_id})
+    return game.data
 }
 export const DeleteGameFromWishlist = async (id) => {
   return await $authHost.delete(`wishlist/${id}`)
@@ -30,12 +28,15 @@ export const GetFromToBin = async (id) => {
     return game.data
 }
 export const getAllFromBin = async () => {
-    const games = await $authHost.get('bin/')
+    const games = await $authHost.get('bin')
     return games.data
 }
 export const getAllFromWishlist = async () => {
-    const games = await $authHost.get('wishlist/')
+    const games = await $authHost.get('wishlist')
     return games.data
+}
+export const delAllFromBin = async () => {
+  return await $authHost.delete(`bin`)
 }
 /*
 

@@ -54,7 +54,7 @@ const login = async () => {
       <div class="custom_br"></div>
       <button class="auth_button" type="submit" v-if="!authStore.loading">Вход</button>
       <VLoader class="auth-loader" v-else></VLoader>
-      <div class="custom_br"></div>
+      <div class="custFom_br"></div>
       <div style="color: #999">
         Нет аккаунта? <router-link to="/register" class="a">Зарегистрироваться</router-link>
       </div>

@@ -10,7 +10,6 @@ const router = useRouter()
 const register = async () => {
     await authStore.register()
     if (!authStore.authError) {
-        console.log('no error register')
         await authStore.login()
         await router.push('/')
     } else {

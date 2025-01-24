@@ -3,7 +3,6 @@
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue";
 import BinCard from "@/components/BinCard.vue";
-const some_bool = true;
 
 import {getAllFromBin, DeleteGameFromBin} from "@/api/WishList.js";
 import {ref, onMounted} from "vue";
@@ -12,6 +11,7 @@ import {useRouter} from "vue-router";
 
 
 let games = ref([]);
+let some_bool = true;
 
 const router = useRouter()
 const authStore = useAuthStore();
@@ -23,12 +23,29 @@ const getAllGames = async () => {
     console.warn(e);
   }
 }
+const price = () => {
+  let pr = 0;
+  games.value.forEach((game) => {
+    pr += parseInt(game.game_information.price)
+  })
+  return pr
+}
+const delAll = async () => {
+  for (let i =0 ;i<games.value.length;i++) {
+    await DeleteGameFromBin(games.value[i].id)
+  }
+  some_bool = false;
+  location.reload();
+}
+
 const logout = () => {
     authStore.logout()
     router.push('/login')
 }
+
 onMounted(async () => {
     await getAllGames();
+    some_bool = games.value.length > 0
     if (authStore.authError) {
         logout()
     }
@@ -42,20 +59,23 @@ onMounted(async () => {
   <div class="main_bin" v-if="some_bool">
     <div class="in_bin">
       <div v-for="(game, index) in games" :key="index">
-        <BinCard :game_name="game.game_name" :price="game.rating" :image-path="game.game_img"></BinCard>
+        <BinCard :game_name="game.game_information.game_name" :price="game.game_information.price" :ImagePath="game.game_information.game_img" :game_id="game.id"></BinCard>
       </div>
     </div>
 
     <div class="main_pay">
       <div class="to_pay">
         <div>Итого</div>
-        <div>4948 Р</div>
+        <div>{{ price() }} Р</div>
       </div>
-      <button class="auth_button" style="width: 100%">Оплатить</button>
+      <button
+        class="auth_button" style="width: 100%"
+        @click="delAll()"
+      >Оплатить</button>
     </div>
   </div>
 
-  <div style="height: 40%;margin-top: 10%;margin-left: 5%" v-else>
+  <div v-else style="height: 40%;margin-top: 10%;margin-left: 5%">
     <div>
       <img src="/src/assets/empty_bin.svg" alt="">
     </div>

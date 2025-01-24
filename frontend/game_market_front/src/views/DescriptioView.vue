@@ -1,6 +1,9 @@
 <script setup>
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue";
+import {onMounted} from "vue";
+import {getAllFromWishlist, getAllFromBin} from "@/api/WishList.js";
+import {ref} from "vue";
 </script>
 
 <template>
@@ -173,7 +176,16 @@ import Footer from "@/components/Footer.vue";
 
 <script>
 import {getGame} from "@/api/catalog.js";
-import {AddToWishList, AddToBin, DeleteGameFromWishlist, DeleteGameFromBin, GetFromToBin, GetFromWishList} from "@/api/WishList.js"
+import {
+  AddToWishList,
+  AddToBin,
+  DeleteGameFromWishlist,
+  DeleteGameFromBin,
+  GetFromToBin,
+  GetFromWishList,
+  getAllFromWishlist, getAllFromBin
+} from "@/api/WishList.js"
+import {ref} from "vue";
 export default {
   data() {
     return {
@@ -199,37 +211,55 @@ export default {
       }
     },
     async get_info_wishlist() {
-      const game_id = this.$route.params.id;
-      try {
-        const response = await GetFromWishList(game_id)
-        this.is_in_wishlist = (response === true)
-      } catch (e) {
-        this.is_in_wishlist = false
-      }
+      let gamesFromWishlist = ref([]);
+
+      gamesFromWishlist.value = await getAllFromWishlist();
+      gamesFromWishlist.value.forEach((game) => {
+        if (!this.is_in_wishlist) this.is_in_wishlist = parseInt(game.game_information.id) === parseInt(this.$route.params.id)
+        console.info(game.game_information.id, this.$route.params.id)
+      })
     },
     async get_info_bin() {
+      let gamesFromBin = ref([])
+      gamesFromBin.value = await getAllFromBin();
       const game_id = this.$route.params.id;
-      try {
-        const response = await GetFromToBin(game_id)
-        this.is_in_bin = (response === true)
-      } catch (e) {
-        this.is_in_bin = false
-      }
+      gamesFromBin.value.forEach((game) => {
+        if (!this.is_in_bin)  this.is_in_bin = game.game_information.id === parseInt(this.$route.params.id)
+      })
     },
     async change_wishlist() {
-      const game_id = this.$route.params.id;
+      let gamesFromWishlist = ref([]);
+      gamesFromWishlist.value = await getAllFromWishlist();
+      let game_id = -1;
+
       if (this.is_in_wishlist) {
-        await DeleteGameFromWishlist(game_id)
+        gamesFromWishlist.value.forEach(
+          (game) => {
+            if (game_id == -1)
+            game_id = parseInt(this.$route.params.id) === parseInt(game.game_information.id) ? parseInt(game.id) : -1;
+          }
+        )
+        if (game_id != -1)  await DeleteGameFromWishlist(game_id)
         this.is_in_wishlist = false
       } else {
-        await AddToWishList(game_id)
+        await AddToWishList(this.$route.params.id)
         this.is_in_wishlist = true
       }
     },
     async change_bin() {
-      const game_id = this.$route.params.id;
+      let gamesFromBin = ref([]);
+      gamesFromBin.value = await getAllFromBin();
+      let game_id = -1;
       if (this.is_in_bin) {
-        await DeleteGameFromBin(game_id)
+        gamesFromBin.value.forEach(
+          (game) => {
+            if (game_id == -1)
+            game_id = parseInt(this.$route.params.id) === parseInt(game.game_information.id) ? parseInt(game.id) : -1;
+
+            console.info(game.id)
+          }
+        )
+        if (game_id != -1)  await DeleteGameFromBin(game_id)
         this.is_in_bin = false
       } else {
         await AddToBin(game_id)
