@@ -1,0 +1,96 @@
+/* color palette from <https://github.com/vuejs/theme> */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+body {
+    background-color: #141414;
+    display: flex;
+    font-family: Manrope;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 57px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+
+}
+
+#app {
+    background-color: #141414;
+    color: white;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
+}
+
+.a {
+    color: white;
+}
+
+input {
+    background-color: #141414;
+    color: white;
+    border-color: #262626;
+    border-radius: 5px;
+    height: 3vh;
+    width: 25vh
+}
+
+.custom_br {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+.auth {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        width: 50vh;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 24px;
+        background-color: #0F0F0F;
+        padding-bottom: 15%;
+        padding-top: 5%;
+        border-radius: 2vh;
+}
+.up_auth_text {
+        display: flex;
+        font-size: 38px;
+        font-weight: 700;
+        line-height: 57px;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 5%;
+}
+.auth_button {
+        width: 15vh;
+        height: 4vh;
+        color: white;
+        background-color: #009AB6;
+        border-radius: 6px;
+        border-color: #009AB6;
+}
+
+.auth_text {
+  text-align: left;
+}
+h3 {
+  margin: 0;
+  padding: 0;
+  margin-left: 12vh;
+  margin-bottom: 1vh;
+  margin-top: 1vh;
+}
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.change_text_color {
+  color: #999999;
+}
